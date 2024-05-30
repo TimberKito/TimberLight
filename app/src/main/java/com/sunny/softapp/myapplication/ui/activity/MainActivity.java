@@ -24,9 +24,6 @@ import com.sunny.softapp.myapplication.databinding.ActivityMainBinding;
 import com.sunny.softapp.myapplication.tools.ModeManager;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
-    private CameraManager cameraManager;
-    private String cameraId;
-    private boolean isFlashlightOn;
     private static final int CAMERA_REQUEST = 50;
     private ActivityMainBinding binding;
     protected Boolean hasCameraPermission;

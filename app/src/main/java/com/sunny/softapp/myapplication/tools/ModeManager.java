@@ -14,19 +14,17 @@ public class ModeManager {
     private static CameraManager cameraManager = (CameraManager)
             App.appContext.getSystemService(Context.CAMERA_SERVICE);
     private static Timer timer;
-
-
     private static int currentStep = 0;
 
     // Time intervals in milliseconds
-    private static final int shortInterval = 200;  // short flash duration
-    private static final int longInterval = 600;   // long flash duration
-    private static final int gapInterval = 200;    // gap between flashes
-    private static final int cycleInterval = 2000; // gap between SOS cycles
+    private static final int shortInterval = 100;  // Adjusted short flash duration
+    private static final int longInterval = 600;   // Adjusted long flash duration
+    private static final int gapInterval = 200;    // Gap between flashes
+    private static final int cycleInterval = 2000; // Gap between SOS cycles
 
     private static final int[] sosPattern = {
             1, 0, 1, 0, 1, 0, // S: short short short
-            1, 0, 1, 0, 1, 0, // O: long long long
+            2, 0, 2, 0, 2, 0, // O: long long long
             1, 0, 1, 0, 1, 0, // S: short short short
             0, 0, 0, 0, 0, 0  // pause before repeating
     };
@@ -71,31 +69,38 @@ public class ModeManager {
         }, 0, i);
     }
 
-    private static int getInterval(int step) {
-        if (step >= sosPattern.length) {
-            return cycleInterval;
-        }
-        return sosPattern[step] == 1 ? (step % 6 < 3 ? shortInterval : longInterval) : gapInterval;
-    }
-
     public static void onMode03() {
         timer = new Timer();
+        onSos();
+    }
+
+    private static void onSos() {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 try {
-                    if (currentStep < sosPattern.length) {
-                        boolean isLight = sosPattern[currentStep] == 1;
-                        cameraManager.setTorchMode("0", isLight);
-                        currentStep++;
+                    boolean isLight = sosPattern[currentStep] != 0;
+                    cameraManager.setTorchMode("0", isLight);
+
+                    int nextInterval;
+                    if (isLight) {
+                        nextInterval = (sosPattern[currentStep] == 1) ? shortInterval : longInterval;
                     } else {
-                        currentStep = 0;
+                        nextInterval = gapInterval;
                     }
+
+                    currentStep = (currentStep + 1) % sosPattern.length;
+
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            onSos();
+                        }
+                    }, nextInterval);
                 } catch (CameraAccessException e) {
                     throw new RuntimeException(e);
                 }
             }
-        }, 0, getInterval(currentStep));
+        }, 0);
     }
-
 }
