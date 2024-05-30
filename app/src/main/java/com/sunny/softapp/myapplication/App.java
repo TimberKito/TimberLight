@@ -6,7 +6,8 @@ import android.content.SharedPreferences;
 
 public class App extends Application {
     private static final String KEY_VIBRATOR = "KEY_VIBRATOR";
-    private static final String KEY_GESTURE = "KEY_GESTURE";
+    //    private static final String KEY_GESTURE = "KEY_GESTURE";
+    private static final String KEY_FREQUENCY = "KEY_FREQUENCY";
     public static Context appContext;
     private static SharedPreferences sharedPreferences;
 
@@ -29,11 +30,14 @@ public class App extends Application {
         return sharedPreferences.getBoolean(KEY_VIBRATOR, true);
     }
 
-//    public static void setGestureStatus(boolean b) {
-//
-//    }
-//
-//    public static boolean getGestureStatus() {
-//        return sharedPreferences.getBoolean(KEY_GESTURE, true);
-//    }
+    public static Long getFrequencyStatus() {
+        return sharedPreferences.getLong(KEY_FREQUENCY, 200);
+    }
+
+    public static void setFrequencyStatus(Long i) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong(KEY_FREQUENCY, i);
+        editor.apply();
+    }
+
 }

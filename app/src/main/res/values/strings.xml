@@ -3,7 +3,7 @@
 
     <string name="setting">Setting</string>
     <string name="setting_vibration">Vibration</string>
-    <string name="setting_gesture">Gesture</string>
+    <string name="setting_gesture">Flash frequency</string>
     <string name="setting_vibration_context">Open or close the vibration effect of the application</string>
-    <string name="setting_gesture_context">Turn on the switch of the flashlight by shaking the phone</string>
+    <string name="setting_gesture_context">Set the frequency of flashing flash (unit: ms)</string>
 </resources>

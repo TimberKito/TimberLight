@@ -46,7 +46,8 @@ public class ModeManager {
     }
 
     public static void onMode02() {
-        startFlashLight(300);
+        Long frequencyStatus = App.getFrequencyStatus();
+        startFlashLight(frequencyStatus);
     }
 
     private static void startFlashLight(long i) {
