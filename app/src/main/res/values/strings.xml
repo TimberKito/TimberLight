@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">TimberLight</string>
+    <string name="app_name">Simple Flashlight</string>
+
+    <string name="setting">Setting</string>
+    <string name="setting_vibration">Vibration</string>
+    <string name="setting_gesture">Gesture</string>
+    <string name="setting_vibration_context">Open or close the vibration effect of the application</string>
+    <string name="setting_gesture_context">Turn on the switch of the flashlight by shaking the phone</string>
 </resources>
