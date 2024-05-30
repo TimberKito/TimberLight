@@ -29,11 +29,11 @@ public class App extends Application {
         return sharedPreferences.getBoolean(KEY_VIBRATOR, true);
     }
 
-    public static void setGestureStatus(boolean b) {
-
-    }
-
-    public static boolean getGestureStatus() {
-        return sharedPreferences.getBoolean(KEY_GESTURE, true);
-    }
+//    public static void setGestureStatus(boolean b) {
+//
+//    }
+//
+//    public static boolean getGestureStatus() {
+//        return sharedPreferences.getBoolean(KEY_GESTURE, true);
+//    }
 }

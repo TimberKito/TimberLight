@@ -15,13 +15,11 @@ public class ModeManager {
             App.appContext.getSystemService(Context.CAMERA_SERVICE);
     private static Timer timer;
     private static int currentStep = 0;
-
     // Time intervals in milliseconds
     private static final int shortInterval = 100;  // Adjusted short flash duration
     private static final int longInterval = 600;   // Adjusted long flash duration
     private static final int gapInterval = 200;    // Gap between flashes
     private static final int cycleInterval = 2000; // Gap between SOS cycles
-
     private static final int[] sosPattern = {
             1, 0, 1, 0, 1, 0, // S: short short short
             2, 0, 2, 0, 2, 0, // O: long long long

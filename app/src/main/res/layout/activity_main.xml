@@ -45,8 +45,8 @@
 
         <RadioButton
             android:id="@+id/mode1"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
             android:background="@drawable/selector_mode_01"
             android:button="@null"
             android:checked="true"
@@ -59,8 +59,8 @@
 
         <RadioButton
             android:id="@+id/mode2"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
             android:background="@drawable/selector_mode_02"
             android:button="@null"
             android:gravity="center" />
@@ -72,8 +72,8 @@
 
         <RadioButton
             android:id="@+id/mode3"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
             android:background="@drawable/selector_mode_03"
             android:button="@null"
             android:gravity="center" />
