@@ -8,7 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.sunny.softapp.simpleflashlight"
+        applicationId = "com.sunny.softapp.simpleflashlight.dev"
         minSdk = 23
         targetSdk = 34
         versionCode = 1

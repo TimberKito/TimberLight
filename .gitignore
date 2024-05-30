@@ -14,3 +14,7 @@
 .cxx
 local.properties
 /app/release/Simple Flashlight1.0(1).aab
+/app/release/app-release.apk
+/app/release/baselineProfiles/0/app-release.dm
+/app/release/baselineProfiles/1/app-release.dm
+/app/release/output-metadata.json
