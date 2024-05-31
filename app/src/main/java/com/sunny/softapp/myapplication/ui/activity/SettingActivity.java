@@ -70,9 +70,11 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         PackageInfo packageInfo;
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                packageInfo = App.appContext.getPackageManager().getPackageInfo(App.appContext.getPackageName(), PackageManager.PackageInfoFlags.of(0));
+                packageInfo = App.appContext.getPackageManager().
+                        getPackageInfo(App.appContext.getPackageName(), PackageManager.PackageInfoFlags.of(0));
             } else {
-                packageInfo = App.appContext.getPackageManager().getPackageInfo(App.appContext.getPackageName(), 0);
+                packageInfo = App.appContext.getPackageManager().
+                        getPackageInfo(App.appContext.getPackageName(), 0);
             }
         } catch (PackageManager.NameNotFoundException e) {
             return "";

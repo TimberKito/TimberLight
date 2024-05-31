@@ -2,19 +2,19 @@ package com.sunny.softapp.myapplication.ui.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.os.Vibrator;
 import android.os.VibratorManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -38,6 +38,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     void initView() {
         super.initView();
+
+        CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+        try {
+            String[] cameraIdList = cameraManager.getCameraIdList();
+            for (int i = 0; i < cameraIdList.length; i++) {
+                Log.e("----", cameraIdList[i]);
+            }
+            CameraCharacteristics cameraCharacteristics = cameraManager.getCameraCharacteristics(cameraIdList[0]);
+        } catch (CameraAccessException e) {
+            throw new RuntimeException(e);
+        }
+
         requestPermission();
         initButton();
         initVibrator();
@@ -67,15 +79,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST);
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        System.exit(0);
+                        ActivityCompat.requestPermissions(MainActivity.this,
+                                new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST);
                     }
                 });
+//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        System.exit(0);
+//                    }
+//                });
         AlertDialog dialog = builder.create();
         dialog.show();
     }

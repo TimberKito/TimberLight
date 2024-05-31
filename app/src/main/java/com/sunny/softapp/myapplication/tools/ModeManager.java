@@ -1,7 +1,6 @@
 package com.sunny.softapp.myapplication.tools;
 
 import android.content.Context;
-import android.graphics.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 
@@ -13,6 +12,8 @@ import java.util.TimerTask;
 public class ModeManager {
     private static CameraManager cameraManager = (CameraManager)
             App.appContext.getSystemService(Context.CAMERA_SERVICE);
+
+
     private static Timer timer;
     private static int currentStep = 0;
     // Time intervals in milliseconds
@@ -31,7 +32,7 @@ public class ModeManager {
         if (timer != null)
             timer.cancel();
         try {
-            cameraManager.setTorchMode("0", false);
+            cameraManager.setTorchMode(cameraManager.getCameraIdList()[0], false);
         } catch (CameraAccessException e) {
             throw new RuntimeException(e);
         }
@@ -39,7 +40,7 @@ public class ModeManager {
 
     public static void onMode01() {
         try {
-            cameraManager.setTorchMode("0", true);
+            cameraManager.setTorchMode(cameraManager.getCameraIdList()[0], true);
         } catch (CameraAccessException e) {
             throw new RuntimeException(e);
         }
@@ -60,7 +61,7 @@ public class ModeManager {
             public void run() {
                 isLight = !isLight;
                 try {
-                    cameraManager.setTorchMode("0", isLight);
+                    cameraManager.setTorchMode(cameraManager.getCameraIdList()[0], isLight);
                 } catch (CameraAccessException e) {
                     throw new RuntimeException(e);
                 }
@@ -79,7 +80,7 @@ public class ModeManager {
             public void run() {
                 try {
                     boolean isLight = sosPattern[currentStep] != 0;
-                    cameraManager.setTorchMode("0", isLight);
+                    cameraManager.setTorchMode(cameraManager.getCameraIdList()[0], isLight);
 
                     int nextInterval;
                     if (isLight) {
