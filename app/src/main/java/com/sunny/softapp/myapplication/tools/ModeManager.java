@@ -10,10 +10,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ModeManager {
-    private static CameraManager cameraManager = (CameraManager)
+    private static final CameraManager cameraManager = (CameraManager)
             App.appContext.getSystemService(Context.CAMERA_SERVICE);
-
-
     private static Timer timer;
     private static int currentStep = 0;
     // Time intervals in milliseconds

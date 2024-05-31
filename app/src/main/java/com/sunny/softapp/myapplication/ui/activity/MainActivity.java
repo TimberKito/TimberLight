@@ -75,20 +75,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Granted Permission")
-                .setMessage("Please grant this application camera permission so that you can use this application.")
+                .setMessage("In order for you to get a better experience, please give the application corresponding " +
+                        "permissions.")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ActivityCompat.requestPermissions(MainActivity.this,
                                 new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST);
                     }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
                 });
-//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        System.exit(0);
-//                    }
-//                });
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -101,27 +102,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == binding.mainLight) {
-            if (hasCameraPermission) {
-                if (App.getVibratorStatus()) {
-                    vibrator.vibrate(100);
-                }
-                boolean selected = binding.mainLight.isSelected();
-                if (selected) {
-                    ModeManager.onOffLight();
-                } else {
-                    int buttonId = binding.modeRadioGroup.getCheckedRadioButtonId();
-                    if (buttonId == R.id.mode1) {
-                        ModeManager.onMode01();
-                    } else if (buttonId == R.id.mode2) {
-                        ModeManager.onMode02();
-                    } else if (buttonId == R.id.mode3) {
-                        ModeManager.onMode03();
-                    }
-                }
-                binding.mainLight.setSelected(!selected);
-            } else {
-                showDialog();
+            if (App.getVibratorStatus()) {
+                vibrator.vibrate(100);
             }
+            boolean selected = binding.mainLight.isSelected();
+            if (selected) {
+                ModeManager.onOffLight();
+            } else {
+                int buttonId = binding.modeRadioGroup.getCheckedRadioButtonId();
+                if (buttonId == R.id.mode1) {
+                    ModeManager.onMode01();
+                } else if (buttonId == R.id.mode2) {
+                    ModeManager.onMode02();
+                } else if (buttonId == R.id.mode3) {
+                    ModeManager.onMode03();
+                }
+            }
+            binding.mainLight.setSelected(!selected);
         } else if (v == binding.mainSetting) {
             Intent intent = new Intent(MainActivity.this, SettingActivity.class);
             startActivity(intent);
